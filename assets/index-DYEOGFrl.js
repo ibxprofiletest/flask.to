@@ -40660,10 +40660,10 @@ const yue = {
                     "button-secondary rounded-full flex items-center justify-center gap-3 px-6 md:px-8 py-3 md:py-4 h-auto w-full md:w-auto",
                   asChild: !0,
                   children: u.jsxs("a", {
-                    href: "mailto:hello@flask.do",
+                    href: "mailto:hello@flask.to",
                     children: [
                       u.jsx(MH, { className: "w-5 h-5" }),
-                      "hello@flask.do",
+                      "hello@flask.to",
                     ],
                   }),
                 }),
@@ -125669,8 +125669,8 @@ function gMe() {
                     "Thank you for choosing to be part of our community at Flask (“Company”, “we”, “us”, “our”). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice or our practices with regard to your personal information, please contact us at",
                     " ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
-                      children: "hello@flask.do",
+                      href: "mailto:hello@flask.to",
+                      children: "hello@flask.to",
                     }),
                     ".",
                   ],
@@ -125995,8 +125995,8 @@ function gMe() {
                   children: [
                     "If you wish to delete your Google account data from Flask, please contact us at ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
-                      children: "hello@flask.do",
+                      href: "mailto:hello@flask.to",
+                      children: "hello@flask.to",
                     }),
                     " and we will promptly remove your information as required.",
                   ],
@@ -126012,8 +126012,8 @@ function gMe() {
                   children: [
                     "We may offer products or features that use artificial intelligence (AI). If you use these features, we may process your information as described in this privacy notice. For more information, please contact us at ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
-                      children: "hello@flask.do",
+                      href: "mailto:hello@flask.to",
+                      children: "hello@flask.to",
                     }),
                     ".",
                   ],
@@ -126118,8 +126118,8 @@ function gMe() {
                     "If you wish to exercise any of these rights, please contact us at",
                     " ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
-                      children: "hello@flask.do",
+                      href: "mailto:hello@flask.to",
+                      children: "hello@flask.to",
                     }),
                     ". We will consider and act upon any request in accordance with applicable data protection laws.",
                   ],
@@ -126164,8 +126164,8 @@ function gMe() {
                     "To opt out of all non-essential communications, please contact us at",
                     " ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
-                      children: "hello@flask.do",
+                      href: "mailto:hello@flask.to",
+                      children: "hello@flask.to",
                     }),
                     ".",
                   ],
@@ -126242,8 +126242,8 @@ function gMe() {
                   children: [
                     "If you have questions or comments about this notice, you may email us at ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
-                      children: "hello@flask.do",
+                      href: "mailto:hello@flask.to",
+                      children: "hello@flask.to",
                     }),
                     " or by post to:",
                   ],
@@ -126272,8 +126272,8 @@ function gMe() {
                     "Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please email us at:",
                     " ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
-                      children: "hello@flask.do",
+                      href: "mailto:hello@flask.to",
+                      children: "hello@flask.to",
                     }),
                     ".",
                   ],
@@ -126838,9 +126838,9 @@ function vMe() {
                     "You may delete your Flask account at any time through your account settings or by contacting us at",
                     " ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
+                      href: "mailto:hello@flask.to",
                       className: "text-blue-400 hover:underline",
-                      children: "hello@flask.do",
+                      children: "hello@flask.to",
                     }),
                     ".",
                   ],
@@ -126905,9 +126905,9 @@ function vMe() {
                     " for Flask Pro subscriptions. If you are not satisfied with Flask Pro within 30 days of your initial purchase or renewal, contact us at",
                     " ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
+                      href: "mailto:hello@flask.to",
                       className: "text-blue-400 hover:underline",
-                      children: "hello@flask.do",
+                      children: "hello@flask.to",
                     }),
                     " ",
                     "to request a full refund. Refunds are issued to the original payment method.",
@@ -127063,9 +127063,9 @@ function vMe() {
                     u.jsx("strong", { children: "Email:" }),
                     " ",
                     u.jsx("a", {
-                      href: "mailto:hello@flask.do",
+                      href: "mailto:hello@flask.to",
                       className: "text-blue-400 hover:underline",
-                      children: "hello@flask.do",
+                      children: "hello@flask.to",
                     }),
                     u.jsx("br", {}),
                     u.jsx("strong", { children: "Address:" }),
