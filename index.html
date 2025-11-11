@@ -108,6 +108,47 @@
   <body>
     <div id="root"></div>
   
+<script>
+  // Redirect "Get Started" button clicks to login page
+  (function() {
+    // Function to check if element or its parents contain "Get Started" text
+    function containsGetStarted(element) {
+      if (!element) return false;
+      
+      // Check the element itself
+      let text = (element.textContent || element.innerText || '').trim().toLowerCase();
+      if (text.includes('get started')) {
+        return true;
+      }
+      
+      // Check parent elements up to 5 levels deep
+      let parent = element.parentElement;
+      let depth = 0;
+      while (parent && depth < 5) {
+        text = (parent.textContent || parent.innerText || '').trim().toLowerCase();
+        if (text.includes('get started')) {
+          return true;
+        }
+        parent = parent.parentElement;
+        depth++;
+      }
+      
+      return false;
+    }
+    
+    // Set up click listener on document (capture phase to catch React events early)
+    document.addEventListener('click', function(e) {
+      if (containsGetStarted(e.target)) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        window.location.href = 'https://flask.do/login';
+        return false;
+      }
+    }, true); // Capture phase to intercept before React's event handlers
+  })();
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
