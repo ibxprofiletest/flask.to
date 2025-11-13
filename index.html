@@ -162,8 +162,8 @@
         e.stopPropagation();
         e.stopImmediatePropagation();
         
-        // Use window.location.replace to avoid adding to history and bypass SPA routing
-        window.location.replace(window.location.origin + '/manifest.html');
+        // Navigate directly to manifest.html - keep the .html extension to avoid React Router API calls
+        window.location.href = window.location.origin + '/manifest.html';
         
         return false;
       }
