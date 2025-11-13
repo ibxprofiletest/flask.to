@@ -162,10 +162,8 @@
         e.stopPropagation();
         e.stopImmediatePropagation();
         
-        // Navigate to manifest.html
-        // Note: If you get a 404, your server needs to be configured to serve
-        // static .html files directly instead of routing everything to index.html
-        const manifestUrl = window.location.origin + '/manifest.html';
+        // Try /manifest first (uses Vercel rewrite), fallback to /manifest.html
+        const manifestUrl = window.location.origin + '/manifest';
         window.location.href = manifestUrl;
         
         return false;
