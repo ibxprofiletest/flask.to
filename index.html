@@ -162,9 +162,8 @@
         e.stopPropagation();
         e.stopImmediatePropagation();
         
-        // Try /manifest first (uses Vercel rewrite), fallback to /manifest.html
-        const manifestUrl = window.location.origin + '/manifest';
-        window.location.href = manifestUrl;
+        // Navigate directly to manifest.html - Vercel serves static files automatically
+        window.location.href = window.location.origin + '/manifest.html';
         
         return false;
       }
