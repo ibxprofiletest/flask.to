@@ -467,6 +467,260 @@
     });
   })();
   
+  // Remove all buttons except "Get Started" in the hero section
+  // Keep header buttons intact
+  (function() {
+    function removeExtraButtonsOnly() {
+      // Find all buttons on the page
+      const allButtons = document.querySelectorAll('button, a[role="button"], a[class*="button"], [class*="button"]');
+      
+      allButtons.forEach(btn => {
+        // Skip if in header
+        const isInHeader = btn.closest('header') || 
+                         btn.closest('[class*="header"]') || 
+                         btn.closest('[class*="nav"]') ||
+                         btn.closest('[class*="menu"]');
+        if (isInHeader) return;
+        
+        const text = (btn.textContent || btn.innerText || '').trim().toLowerCase();
+        
+        // Keep only "Get Started" button - remove everything else
+        if (text.includes('get started')) {
+          return; // Keep this button
+        }
+        
+        // Remove X button (has X icon or X.com link)
+        const hasXIcon = btn.querySelector('svg') && 
+                        (btn.href?.includes('x.com') || 
+                         btn.href?.includes('twitter.com') ||
+                         btn.innerHTML.includes('M18.244 2.25h3.308') ||
+                         btn.innerHTML.includes('18.244'));
+        if (hasXIcon) {
+          btn.remove();
+          return;
+        }
+        
+        // Remove "CA: Coming Soon" button
+        if (text.includes('coming soon') || text.includes('ca:')) {
+          btn.remove();
+          return;
+        }
+        
+        // Remove "Book a Demo" button
+        if (text.includes('book a demo') || text.includes('book demo')) {
+          btn.remove();
+          return;
+        }
+        
+        // Also check aria-label and title attributes
+        const ariaLabel = (btn.getAttribute('aria-label') || '').toLowerCase();
+        const title = (btn.getAttribute('title') || '').toLowerCase();
+        
+        // Remove if it's a button-like element and not "Get Started"
+        const isButton = btn.tagName === 'BUTTON' || 
+                        (btn.tagName === 'A' && (btn.classList.toString().toLowerCase().includes('button') || btn.getAttribute('role') === 'button')) ||
+                        btn.classList.toString().toLowerCase().includes('button');
+        
+        if (isButton && !text.includes('get started') && 
+            !ariaLabel.includes('get started') && 
+            !title.includes('get started')) {
+          // Check if it's in the hero section (near "Video Collaboration" heading)
+          const heroSection = btn.closest('section') || btn.closest('div');
+          if (heroSection) {
+            const sectionText = (heroSection.textContent || '').toLowerCase();
+            if (sectionText.includes('video collaboration') || sectionText.includes('built for how creatives')) {
+              btn.remove();
+            }
+          }
+        }
+      });
+    }
+    
+    function removeExtraButtons() {
+      // Find the "Video Collaboration" heading to identify the hero section
+      const headings = Array.from(document.querySelectorAll('h1, h2, [class*="heading"], [class*="title"]'));
+      let heroSection = null;
+      
+      for (const heading of headings) {
+        const text = (heading.textContent || heading.innerText || '').trim().toLowerCase();
+        if (text.includes('video collaboration') || text.includes('built for how creatives')) {
+          heroSection = heading.closest('section') || heading.closest('div') || heading.parentElement;
+          break;
+        }
+      }
+      
+      if (!heroSection) {
+        // Fallback: find Get Started button and work backwards, but exclude header
+        const getStartedButtons = Array.from(document.querySelectorAll('button, a[role="button"], [class*="button"]'));
+        for (const btn of getStartedButtons) {
+          const text = (btn.textContent || btn.innerText || '').trim().toLowerCase();
+          if (text === 'get started' || text.startsWith('get started')) {
+            // Check if this button is NOT in header (header usually has nav, menu, etc.)
+            const isInHeader = btn.closest('header') || 
+                             btn.closest('[class*="header"]') || 
+                             btn.closest('[class*="nav"]') ||
+                             btn.closest('[class*="menu"]');
+            if (!isInHeader) {
+              heroSection = btn.closest('section') || btn.closest('div') || btn.parentElement;
+              break;
+            }
+          }
+        }
+      }
+      
+      if (!heroSection) return;
+      
+      // Find "Get Started" button within the hero section only (not in header)
+      const getStartedButtons = Array.from(heroSection.querySelectorAll('button, a[role="button"], [class*="button"]'));
+      let getStartedBtn = null;
+      
+      for (const btn of getStartedButtons) {
+        const text = (btn.textContent || btn.innerText || '').trim().toLowerCase();
+        if (text === 'get started' || text.startsWith('get started')) {
+          // Double check it's not in header
+          const isInHeader = btn.closest('header') || 
+                           btn.closest('[class*="header"]') || 
+                           btn.closest('[class*="nav"]') ||
+                           btn.closest('[class*="menu"]');
+          if (!isInHeader) {
+            getStartedBtn = btn;
+            break;
+          }
+        }
+      }
+      
+      if (!getStartedBtn) return;
+      
+      const parent = getStartedBtn.parentElement;
+      if (!parent) return;
+      
+      // Only remove buttons in the same immediate container (not from header)
+      const siblings = Array.from(parent.children);
+      siblings.forEach(sibling => {
+        if (sibling !== getStartedBtn) {
+          // Skip if it's in header
+          const isInHeader = sibling.closest('header') || 
+                           sibling.closest('[class*="header"]') || 
+                           sibling.closest('[class*="nav"]') ||
+                           sibling.closest('[class*="menu"]');
+          if (isInHeader) return;
+          
+          const text = (sibling.textContent || sibling.innerText || '').trim().toLowerCase();
+          // Check if it's a button-like element
+          const isButton = sibling.tagName === 'BUTTON' || 
+                          (sibling.tagName === 'A' && (sibling.classList.toString().toLowerCase().includes('button') || sibling.getAttribute('role') === 'button'));
+          
+          // Remove if it's a button and not "Get Started"
+          if (isButton && !text.includes('get started')) {
+            sibling.remove();
+          }
+          
+          // Also remove X button (has X icon or X.com link)
+          const hasXIcon = sibling.querySelector('svg') && 
+                          (sibling.href?.includes('x.com') || 
+                           sibling.href?.includes('twitter.com') ||
+                           sibling.innerHTML.includes('M18.244 2.25h3.308'));
+          if (hasXIcon) {
+            sibling.remove();
+          }
+          
+          // Remove CA: Coming Soon button
+          if (text.includes('coming soon') || text.includes('ca:')) {
+            sibling.remove();
+          }
+          
+          // Remove "Book a Demo" button
+          if (text.includes('book a demo') || text.includes('book demo')) {
+            sibling.remove();
+            return;
+          }
+        }
+      });
+      
+      // Also check all buttons in hero section to catch "Book a Demo" button
+      const allButtons = Array.from(heroSection.querySelectorAll('button, a[role="button"], a[class*="button"], [class*="button"]'));
+      allButtons.forEach(btn => {
+        // Skip if in header
+        const isInHeader = btn.closest('header') || 
+                         btn.closest('[class*="header"]') || 
+                         btn.closest('[class*="nav"]') ||
+                         btn.closest('[class*="menu"]');
+        if (isInHeader) return;
+        
+        const btnText = (btn.textContent || btn.innerText || '').trim().toLowerCase();
+        
+        // Remove "Book a Demo" button - be very specific
+        if ((btnText.includes('book a demo') || btnText.includes('book demo')) && !btnText.includes('get started')) {
+          btn.remove();
+          return;
+        }
+        
+        // Also check aria-label and title
+        const ariaLabel = (btn.getAttribute('aria-label') || '').toLowerCase();
+        const title = (btn.getAttribute('title') || '').toLowerCase();
+        if ((ariaLabel.includes('book a demo') || ariaLabel.includes('book demo') ||
+             title.includes('book a demo') || title.includes('book demo')) &&
+            !btnText.includes('get started')) {
+          btn.remove();
+          return;
+        }
+      });
+      
+      // Also run the dedicated removal function
+      removeExtraButtonsOnly();
+    }
+    
+    // Run immediately and after delays
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        removeExtraButtons();
+        removeExtraButtonsOnly();
+      });
+    } else {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    }
+    
+    setTimeout(function() {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    }, 50);
+    setTimeout(function() {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    }, 100);
+    setTimeout(function() {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    }, 200);
+    setTimeout(function() {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    }, 500);
+    setTimeout(function() {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    }, 1000);
+    setTimeout(function() {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    }, 2000);
+    setTimeout(function() {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    }, 3000);
+    
+    // Watch for new elements
+    const observer = new MutationObserver(function() {
+      removeExtraButtons();
+      removeExtraButtonsOnly();
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  })();
+  
   // Remove links from award icons
   (function() {
     function removeAwardLinks() {
